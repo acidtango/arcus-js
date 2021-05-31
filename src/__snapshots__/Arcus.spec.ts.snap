@@ -1,0 +1,178 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Arcus getAccount 1`] = `
+Object {
+  "balance": 9991798.39,
+  "currency": "MXN",
+  "minimumBalance": 0,
+  "name": "rabbit",
+}
+`;
+
+exports[`Arcus getBillers 1`] = `
+Object {
+  "accountNumberDigits": "10",
+  "billType": "account_number",
+  "billerType": "Cable",
+  "canCheckBalance": true,
+  "country": "MX",
+  "currency": "MXN",
+  "hasXdata": false,
+  "hoursToFulfill": 0,
+  "id": 12493,
+  "mask": "9999999999",
+  "name": "TotalPlay",
+  "requiresNameOnAccount": false,
+  "supportsPartialPayments": true,
+  "type": "biller",
+}
+`;
+
+exports[`Arcus getBillers 2`] = `
+Object {
+  "accountNumberDigits": "10",
+  "billType": "phone_number",
+  "billerType": "MXCell",
+  "canCheckBalance": false,
+  "country": "MX",
+  "currency": "MXN",
+  "hasXdata": false,
+  "hoursToFulfill": 0,
+  "id": 13603,
+  "mask": "(999) 999-9999",
+  "name": "TAETelcel",
+  "requiresNameOnAccount": false,
+  "supportsPartialPayments": false,
+  "type": "biller",
+}
+`;
+
+exports[`Arcus getBillers 3`] = `
+Object {
+  "accountNumberDigits": "10",
+  "billType": "phone_number",
+  "billerType": "GiftCard",
+  "canCheckBalance": false,
+  "country": "MX",
+  "currency": "MXN",
+  "hasXdata": false,
+  "hoursToFulfill": null,
+  "id": 13722,
+  "mask": "9999999999",
+  "name": "CÓDIGO NETFLIX $150",
+  "requiresNameOnAccount": false,
+  "supportsPartialPayments": false,
+  "type": "biller",
+}
+`;
+
+exports[`Arcus getBillersGiftCards 1`] = `
+Object {
+  "accountNumberDigits": "10",
+  "availableGiftCardAmounts": Array [
+    "150.00",
+  ],
+  "billType": "phone_number",
+  "billerType": "GiftCard",
+  "canCheckBalance": false,
+  "country": "MX",
+  "currency": "MXN",
+  "giftCardCommission": 3.75,
+  "hasXdata": false,
+  "hoursToFulfill": null,
+  "id": 13722,
+  "mask": "9999999999",
+  "name": "CÓDIGO NETFLIX $150",
+  "requiresNameOnAccount": false,
+  "supportsPartialPayments": false,
+  "type": "biller",
+}
+`;
+
+exports[`Arcus getBillersTopUps 1`] = `
+Object {
+  "accountNumberDigits": "10",
+  "availableTopupAmounts": Array [
+    "10.00",
+    "20.00",
+    "30.00",
+    "50.00",
+    "100.00",
+    "150.00",
+    "200.00",
+    "300.00",
+    "500.00",
+  ],
+  "billType": "phone_number",
+  "billerType": "MXCell",
+  "canCheckBalance": false,
+  "country": "MX",
+  "currency": "MXN",
+  "hasXdata": false,
+  "hoursToFulfill": 0,
+  "id": 13603,
+  "mask": "(999) 999-9999",
+  "name": "TAETelcel",
+  "requiresNameOnAccount": false,
+  "supportsPartialPayments": false,
+  "topupCommission": 7.5,
+  "type": "biller",
+}
+`;
+
+exports[`Arcus getBillersUtilities 1`] = `
+Object {
+  "accountNumberDigits": "10",
+  "billType": "account_number",
+  "billerType": "Cable",
+  "canCheckBalance": true,
+  "country": "MX",
+  "currency": "MXN",
+  "hasXdata": false,
+  "hoursToFulfill": 0,
+  "id": 12493,
+  "mask": "9999999999",
+  "name": "TotalPlay",
+  "requiresNameOnAccount": false,
+  "supportsPartialPayments": true,
+  "type": "biller",
+}
+`;
+
+exports[`Arcus getTransaction 1`] = `
+Object {
+  "accountNumber": "256863285",
+  "amount": 12.21,
+  "amountCurrency": "MXN",
+  "amountUsd": 0.61,
+  "createdAt": "2021-01-26T09:44:35Z",
+  "externalId": "84bce950-c878-483e-aeca-41217f969301",
+  "fxRate": 1,
+  "hoursToFulfill": 24,
+  "id": 100034581,
+  "status": "fulfilled",
+  "ticketText": "Pago realizado exitosamente Auth: 1611654275",
+  "totalUsd": 0.61,
+  "transactionFee": 0,
+  "type": "transaction",
+}
+`;
+
+exports[`Arcus getTransactionsList 1`] = `
+Object {
+  "accountNumber": "256863285",
+  "amount": 12.21,
+  "amountCurrency": "MXN",
+  "amountUsd": 0.61,
+  "createdAt": "2021-01-26T09:44:35Z",
+  "externalId": "84bce950-c878-483e-aeca-41217f969301",
+  "fxRate": 1,
+  "hoursToFulfill": 24,
+  "id": 100034581,
+  "status": "fulfilled",
+  "ticketText": "Pago realizado exitosamente Auth: 1611654275",
+  "totalUsd": 0.61,
+  "transactionFee": 0,
+  "type": "transaction",
+}
+`;

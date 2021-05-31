@@ -1,0 +1,77 @@
+{
+  "name": "@acid-tango/arcus-js",
+  "version": "0.0.6",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:acidtango/arcus-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/acidtango/arcus-js/issues"
+  },
+  "homepage": "https://github.com/acidtango/arcus-js#readme",
+  "files": [
+    "lib/**/*"
+  ],
+  "main": "lib/src/index.js",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint '{src,apps,libs,test}/**/*.ts'",
+    "lint:fix": "eslint '{src,apps,libs,test}/**/*.ts' --fix",
+    "build": "tsc",
+    "release": "standard-version",
+    "prepare": "husky install"
+  },
+  "engines": {
+    "node": ">=12",
+    "yarn": ">=1.22.5"
+  },
+  "dependencies": {
+    "node-fetch": "2.6.1",
+    "regenerator-runtime": "0.13.7"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "12.1.4",
+    "@commitlint/config-conventional": "12.1.4",
+    "@types/jest": "26.0.23",
+    "@types/node": "14.17.1",
+    "@types/node-fetch": "2.5.10",
+    "@typescript-eslint/eslint-plugin": "4.22.1",
+    "@typescript-eslint/parser": "4.22.1",
+    "eslint": "7.27.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-prettier": "3.4.0",
+    "husky": "6.0.0",
+    "jest": "26.6.3",
+    "prettier": "2.3.0",
+    "standard-version": "9.3.0",
+    "ts-jest": "26.5.6",
+    "typescript": "4.2.4"
+  },
+  "peerDependencies": {
+    "@types/node-fetch": "2.5.10"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setup.ts"
+    ],
+    "testRegex": "\\..*spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node",
+    "testTimeout": 30000
+  }
+}
