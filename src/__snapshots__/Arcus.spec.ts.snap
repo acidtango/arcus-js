@@ -2,7 +2,7 @@
 
 exports[`Arcus getAccount 1`] = `
 Object {
-  "balance": 9991798.39,
+  "balance": 9991243.39,
   "currency": "MXN",
   "minimumBalance": 0,
   "name": "rabbit",
