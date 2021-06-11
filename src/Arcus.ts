@@ -23,6 +23,8 @@ import { ArcusBillPaymentCreateResponse } from './typings/ArcusBillPaymentCreate
 import { generateBody } from './utils/generateBody';
 import fetch, { Response } from 'node-fetch';
 import { ArcusBillerUtility } from './typings/ArcusBillerUtility';
+import { ArcusSingleConsultParams } from './typings/ArcusSingleConsultParams';
+import { PostSingleConsultResponse } from './typings/PostSingleConsultResponse';
 
 /**
  * Arcus Fintech JS client
@@ -284,6 +286,22 @@ export class Arcus {
   }
 
   /**
+   * Consult an utility bill in Arcus with an account number. Account number bills are mostly to make payments without providing personal information.
+   */
+  singleConsult(params: ArcusSingleConsultParams) {
+    const path = '/single/consult';
+
+    return this.http(this.config.baseURL + path, {
+      method: 'POST',
+      body: generateBody(params),
+      headers: this.generateDefaultHeaders(path),
+    })
+      .then(Arcus.dealWithErrors)
+      .then(Arcus.extractJson)
+      .then((data) => camelize<ArcusTransaction>(data));
+  }
+
+  /**
    * This endpoint retrieves a specific transaction.
    */
   getTransaction(transactionId: number) {
@@ -311,6 +329,6 @@ export class Arcus {
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
-      .then((data) => camelize<ArcusTransaction>(data));
+      .then((data) => camelize<PostSingleConsultResponse>(data));
   }
 }

@@ -2,7 +2,7 @@
 
 exports[`Arcus getAccount 1`] = `
 Object {
-  "balance": 9991243.39,
+  "balance": 9982715.67,
   "currency": "MXN",
   "minimumBalance": 0,
   "name": "rabbit",
@@ -160,18 +160,18 @@ Object {
 
 exports[`Arcus getTransactionsList 1`] = `
 Object {
-  "accountNumber": "256863285",
-  "amount": 12.21,
+  "accountNumber": "9080798098",
+  "amount": 20,
   "amountCurrency": "MXN",
-  "amountUsd": 0.61,
-  "createdAt": "2021-01-26T09:44:35Z",
-  "externalId": "84bce950-c878-483e-aeca-41217f969301",
+  "amountUsd": 1,
+  "createdAt": "2021-06-02T12:15:17Z",
+  "externalId": "00f2b0bc-d3ee-491e-b844-4f7a36b4d24d",
   "fxRate": 1,
-  "hoursToFulfill": 24,
-  "id": 100034581,
+  "hoursToFulfill": 0,
+  "id": 100149594,
   "status": "fulfilled",
-  "ticketText": "Pago realizado exitosamente Auth: 1611654275",
-  "totalUsd": 0.61,
+  "ticketText": "Pago realizado exitosamente Auth: 1622636117",
+  "totalUsd": 1,
   "transactionFee": 0,
   "type": "transaction",
 }

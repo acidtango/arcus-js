@@ -23,7 +23,7 @@ describe('Arcus', () => {
   it('getBillers', async () => {
     const billers = await arcus.getBillers();
 
-    expect(billers).toHaveLengthWithin(120, 150);
+    expect(billers).toHaveLengthWithin(100, 130);
 
     const totalPlay = billers.find(billerTotalPlay);
     const telcel = billers.find(billerTelcel);
@@ -37,7 +37,7 @@ describe('Arcus', () => {
   it('getBillersUtilities', async () => {
     const utilities = await arcus.getBillersUtilities();
 
-    expect(utilities).toHaveLengthWithin(70, 90);
+    expect(utilities).toHaveLengthWithin(60, 80);
 
     const totalPlay = utilities.find(billerTotalPlay);
 
