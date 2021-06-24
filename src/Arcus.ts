@@ -1,30 +1,31 @@
-import { CreateBillPayment } from './typings/CreateBillPayment';
+import fetch, { Response } from 'node-fetch';
 import { ArcusAccount } from './typings/ArcusAccount';
 import { ArcusBill } from './typings/ArcusBill';
+import { ArcusBillCreate } from './typings/ArcusBillCreate';
 import { ArcusBillerGiftCards } from './typings/ArcusBillerGiftCards';
 import { ArcusBillerTopUp } from './typings/ArcusBillerTopUp';
+import { ArcusBillerUtility } from './typings/ArcusBillerUtility';
+import { ArcusBillPaymentCreateResponse } from './typings/ArcusBillPaymentCreateResponse';
+import { ArcusBillXData } from './typings/ArcusBillXData';
+import { ArcusError } from './typings/ArcusError';
+import { ArcusErrorCode } from './typings/ArcusErrorCode';
+import { ArcusErrorResponse } from './typings/ArcusErrorResponse';
+import { ArcusGetTransactionParams } from './typings/ArcusGetTransactionParams';
+import { ArcusSingleConsultParams } from './typings/ArcusSingleConsultParams';
+import { ArcusSinglePayParams } from './typings/ArcusSinglePayParams';
 import { ArcusTransaction } from './typings/ArcusTransaction';
+import { CreateBillPayment } from './typings/CreateBillPayment';
 import { GetBillersGiftCardsResponse } from './typings/GetBillersGiftCardsResponse';
+import { GetBillersResponse } from './typings/GetBillersResponse';
 import { GetBillersTopUpsResponse } from './typings/GetBillersTopUpsResponse';
 import { GetBillerUtilitiesResponse } from './typings/GetBillerUtilitiesResponse';
 import { GetBillsListResponse } from './typings/GetBillsListResponse';
 import { GetTransactionsListResponse } from './typings/GetTransactionsListResponse';
+import { PostSingleConsultResponse } from './typings/PostSingleConsultResponse';
 import { camelize } from './utils/camelize';
-import { ArcusBillXData } from './typings/ArcusBillXData';
-import { GetBillersResponse } from './typings/GetBillersResponse';
-import { ArcusBillCreate } from './typings/ArcusBillCreate';
-import { ArcusSinglePayParams } from './typings/ArcusSinglePayParams';
-import { ArcusErrorCode } from './typings/ArcusErrorCode';
-import { ArcusErrorResponse } from './typings/ArcusErrorResponse';
-import { ArcusError } from './typings/ArcusError';
 import { ArcusCrypto } from './utils/crypto/ArcusCrypto';
 import { ArcusCryptoNode } from './utils/crypto/ArcusCryptoNode';
-import { ArcusBillPaymentCreateResponse } from './typings/ArcusBillPaymentCreateResponse';
 import { generateBody } from './utils/generateBody';
-import fetch, { Response } from 'node-fetch';
-import { ArcusBillerUtility } from './typings/ArcusBillerUtility';
-import { ArcusSingleConsultParams } from './typings/ArcusSingleConsultParams';
-import { PostSingleConsultResponse } from './typings/PostSingleConsultResponse';
 
 /**
  * Arcus Fintech JS client
@@ -163,10 +164,11 @@ export class Arcus {
       .then((data) => data.billers);
   }
 
-  getTransactions(): Promise<ArcusTransaction[]> {
+  getTransactions(params?: ArcusGetTransactionParams): Promise<ArcusTransaction[]> {
     const path = '/transactions';
+    const query = params?.externalId ? `q[external_id_eq]=${params.externalId}` : ``;
 
-    return this.http(this.config.baseURL + path, {
+    return this.http(this.config.baseURL + path + query, {
       method: 'GET',
       headers: this.generateDefaultHeaders(path),
     })
