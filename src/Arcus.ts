@@ -166,11 +166,11 @@ export class Arcus {
 
   getTransactions(params?: ArcusGetTransactionParams): Promise<ArcusTransaction[]> {
     const path = '/transactions';
-    const query = params?.externalId ? `/q[external_id_eq]=${params.externalId}` : ``;
+    const query = params?.externalId ? `?q[external_id_eq]=${params.externalId}` : ``;
 
     return this.http(this.config.baseURL + path + query, {
       method: 'GET',
-      headers: this.generateDefaultHeaders(path),
+      headers: this.generateDefaultHeaders(path + query),
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)

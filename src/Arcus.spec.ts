@@ -1,15 +1,13 @@
+import { NETFLIX, TELCEL, TOTALPLAY, TRANSACTION } from '../test/fixtures/fixtures';
 import { Arcus } from './Arcus';
 import { ArcusBiller } from './typings/ArcusBiller';
-import { ArcusError } from './typings/ArcusError';
 
 const billerWithName = (name: string) => (utility: ArcusBiller) => utility.name === name;
 
 const billerTotalPlay = billerWithName('TotalPlay');
 const billerTelcel = billerWithName('TAETelcel');
 const billerNetflix = billerWithName('CÓDIGO NETFLIX $150');
-const EXAMPLE_TRANSACTION_ID = 100034581;
 const EXAMPLE_FAKE_EXTERNAL_TRANSACTION_ID = 'EXAMPLE_NON_EXISTINT_TRANSACTION';
-const EXAMPLE_EXTERNAL_TRANSACTION_ID = 'EXAMPLE_REAL_TRANSACTION';
 
 describe('Arcus', () => {
   const arcus = Arcus.create(
@@ -20,7 +18,9 @@ describe('Arcus', () => {
   it('getAccount', async () => {
     const account = await arcus.getAccount();
 
-    expect(account).toMatchSnapshot();
+    expect(account.balance).toBeDefined();
+    expect(account.currency).toEqual(TRANSACTION.currency);
+    expect(account.name).toEqual('rabbit');
   });
 
   it('getBillers', async () => {
@@ -32,9 +32,14 @@ describe('Arcus', () => {
     const telcel = billers.find(billerTelcel);
     const netflix = billers.find(billerNetflix);
 
-    expect(totalPlay).toMatchSnapshot();
-    expect(telcel).toMatchSnapshot();
-    expect(netflix).toMatchSnapshot();
+    expect(totalPlay).toBeDefined();
+    expect(totalPlay?.name).toEqual(TOTALPLAY.name);
+
+    expect(telcel).toBeDefined();
+    expect(telcel?.name).toEqual(TELCEL.name);
+
+    expect(netflix).toBeDefined();
+    expect(netflix?.name).toEqual(NETFLIX.name);
   });
 
   it('getBillersUtilities', async () => {
@@ -44,7 +49,8 @@ describe('Arcus', () => {
 
     const totalPlay = utilities.find(billerTotalPlay);
 
-    expect(totalPlay).toMatchSnapshot();
+    expect(totalPlay?.name).toEqual(TOTALPLAY.name);
+    expect(totalPlay?.billerType).toEqual(TOTALPLAY.billerType);
   });
 
   it('getBillersTopUps', async () => {
@@ -54,7 +60,8 @@ describe('Arcus', () => {
 
     const telcel = topUps.find(billerTelcel);
 
-    expect(telcel).toMatchSnapshot();
+    expect(telcel?.name).toEqual(TELCEL.name);
+    expect(telcel?.billerType).toEqual(TELCEL.billerType);
   });
 
   it('getBillersGiftCards', async () => {
@@ -64,7 +71,7 @@ describe('Arcus', () => {
 
     const netflix = giftCards.find(billerNetflix);
 
-    expect(netflix).toMatchSnapshot();
+    expect(netflix?.billerType).toEqual(NETFLIX.billerType);
   });
 
   describe('getTransactions', () => {
@@ -74,34 +81,36 @@ describe('Arcus', () => {
       expect(transactions).toHaveLengthWithin(95, 105);
 
       const first = transactions[0];
-
-      expect(first).toMatchSnapshot();
+      expect(first).toBeDefined();
     });
 
-    it('getTransaction With paramater and returns error if its not found', async () => {
-      await expect(
-        arcus.getTransactions({
-          externalId: EXAMPLE_FAKE_EXTERNAL_TRANSACTION_ID,
-        }),
-      ).rejects.toBeInstanceOf(ArcusError);
-    });
-
-    it.skip('getTransaction With paramater and returns result', async () => {
+    it('getTransaction With paramater and returns an empty if its not found', async () => {
       const transactions = await arcus.getTransactions({
-        externalId: EXAMPLE_EXTERNAL_TRANSACTION_ID,
+        externalId: EXAMPLE_FAKE_EXTERNAL_TRANSACTION_ID,
+      });
+      expect(transactions).toHaveLength(0);
+    });
+
+    it('getTransaction With paramater and returns result', async () => {
+      const transactions = await arcus.getTransactions({
+        externalId: TRANSACTION.externalId,
       });
       expect(transactions).toHaveLength(1);
 
       const first = transactions[0];
 
-      expect(first).toMatchSnapshot();
+      expect(first.id).toEqual(TRANSACTION.transactionId);
+      expect(first.amountCurrency).toEqual(TRANSACTION.currency);
+      expect(first.accountNumber).toEqual(TRANSACTION.accountNumber);
     });
   });
 
   it('getTransaction', async () => {
-    const transaction = await arcus.getTransaction(EXAMPLE_TRANSACTION_ID);
+    const transaction = await arcus.getTransaction(TRANSACTION.transactionId);
 
-    expect(transaction).toMatchSnapshot();
+    expect(transaction.id).toEqual(TRANSACTION.transactionId);
+    expect(transaction.amountCurrency).toEqual(TRANSACTION.currency);
+    expect(transaction.accountNumber).toEqual(TRANSACTION.accountNumber);
   });
 
   it.todo('cancelTransaction');
