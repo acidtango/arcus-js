@@ -1,4 +1,5 @@
 import fetch, { Response } from 'node-fetch';
+import * as queryString from 'querystring';
 import { ArcusAccount } from './typings/ArcusAccount';
 import { ArcusBill } from './typings/ArcusBill';
 import { ArcusBillCreate } from './typings/ArcusBillCreate';
@@ -166,7 +167,11 @@ export class Arcus {
 
   getTransactions(params?: ArcusGetTransactionParams): Promise<ArcusTransaction[]> {
     const path = '/transactions';
-    const query = params?.externalId ? `?q[external_id_eq]=${params.externalId}` : ``;
+    const query =
+      '?' +
+      queryString.encode({
+        'q[external_id_eq]': params?.externalId,
+      });
 
     return this.http(this.config.baseURL + path + query, {
       method: 'GET',
