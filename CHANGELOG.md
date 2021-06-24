@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.0](https://github.com/acidtango/arcus-js/compare/v0.0.7...v0.1.0) (2021-06-24)
+
+
+### Features
+
+* add parameter in get transactions ([#15](https://github.com/acidtango/arcus-js/issues/15)) ([71cbb516](https://github.com/acidtango/arcus-js/commit/71cbb516491d56b2d644270b234906c0b46fe12e))
+
 ### [0.0.7](https://github.com/acidtango/arcus-js/compare/v0.0.6...v0.0.7) (2021-06-11)
 
 
