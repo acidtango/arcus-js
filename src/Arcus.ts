@@ -43,6 +43,19 @@ export class Arcus {
   }
 
   private static async dealWithErrors(response: Response) {
+    /**
+     * If status is greater than 500, Arcus is returning and HTML response, so we can't treat the
+     * body as JSON
+     */
+    if (response.status >= 500) {
+      const text = await response.text();
+
+      throw new ArcusError(
+        ArcusErrorCode.UNEXPECTED_ERROR,
+        text || `Unknown error from Arcus: ${response.status}`,
+      );
+    }
+
     if (response.status >= 400) {
       const body: ArcusErrorResponse | undefined = await response.json();
 

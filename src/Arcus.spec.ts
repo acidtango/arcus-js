@@ -1,6 +1,7 @@
 import { NETFLIX, TELCEL, TOTALPLAY, TRANSACTION } from '../test/fixtures/fixtures';
 import { Arcus } from './Arcus';
 import { ArcusBiller } from './typings/ArcusBiller';
+import { ArcusErrorCode } from './typings/ArcusErrorCode';
 
 const billerWithName = (name: string) => (utility: ArcusBiller) => utility.name === name;
 
@@ -133,5 +134,19 @@ describe('Arcus', () => {
 
   it.todo('deleteBill');
 
-  it.todo('singlePay');
+  describe('singlePay', () => {
+    it('does not fail when buying a top up', async () => {
+      const error = await arcus
+        .singlePay({
+          billerId: 13597,
+          accountNumber: '4545454545',
+          currency: 'MXN',
+          amount: 10,
+          externalId: 'db8bf3b9-6db5-410f-ac5f-e0967eac5ff9',
+        })
+        .catch((error) => error);
+
+      expect(error.code).toEqual(ArcusErrorCode.UNEXPECTED_ERROR);
+    });
+  });
 });
