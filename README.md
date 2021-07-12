@@ -78,6 +78,19 @@ Cancel a transaction by id:
 ```typescript
 await arcusClient.cancelTransaction(transactionId)
 ```
+### How to do a release
+
+1. update the changelog
+```
+  yarn release
+```
+2. delete the tag created by the release script
+3. create a PR
+4. merge to main with ```rebase and merge``` button to avoid merge commit.
+5. create a tag starting with "v". example v0.0.6
+6. push the tag
+7. create a release
+8. wait for ci to automatically publish.
 
 ## Contributing
 
