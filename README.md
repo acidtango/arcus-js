@@ -82,7 +82,7 @@ await arcusClient.cancelTransaction(transactionId)
 
 1. Update the changelog
     ```
-      yarn release
+    yarn release
     ```
 2. Delete the tag created by the release script
 3. Create a PR
