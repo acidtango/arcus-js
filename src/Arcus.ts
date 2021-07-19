@@ -27,6 +27,7 @@ import { camelize } from './utils/camelize';
 import { ArcusCrypto } from './utils/crypto/ArcusCrypto';
 import { ArcusCryptoNode } from './utils/crypto/ArcusCryptoNode';
 import { generateBody } from './utils/generateBody';
+import { ArcusOptions } from './typings/ArcusOptions';
 
 /**
  * Arcus Fintech JS client
@@ -34,8 +35,19 @@ import { generateBody } from './utils/generateBody';
  * API Reference: https://docs.arcusfi.com/api/3.mx/endpoints/
  */
 export class Arcus {
+  public static createNew(options: ArcusOptions) {
+    return new Arcus(options);
+  }
+
+  /**
+   * @deprecated Deprecated because low options configuration
+   * @see Arcus#createNew
+   */
   public static create(apiKey: string, secretKey: string) {
-    return new Arcus(apiKey, secretKey, fetch, new ArcusCryptoNode());
+    return new Arcus({
+      apiKey,
+      secretKey,
+    });
   }
 
   private static extractJson(response: Response) {
@@ -67,24 +79,42 @@ export class Arcus {
     return response;
   }
 
-  private config: {
+  private readonly config: {
     baseURL: string;
     headers: { Accept: string; 'Content-Type': string; 'Content-MD5': string };
+    timeout?: number;
   };
 
-  constructor(
-    private apiKey: string,
-    private secretKey: string,
-    private http: typeof fetch,
-    private crypto: ArcusCrypto,
-  ) {
+  private readonly apiKey: string;
+  private readonly secretKey: string;
+  private readonly http: typeof fetch;
+  private readonly crypto: ArcusCrypto;
+
+  constructor({
+    apiKey,
+    secretKey,
+    http = fetch,
+    crypto = new ArcusCryptoNode(),
+    baseUrl = 'https://api.staging.arcusapi.com',
+    timeout,
+  }: ArcusOptions) {
+    if (!apiKey || !secretKey) {
+      throw new Error(`apiKey and secretKey are mandatory options`);
+    }
+
+    this.apiKey = apiKey;
+    this.secretKey = secretKey;
+    this.http = http;
+    this.crypto = crypto;
+
     this.config = {
-      baseURL: 'https://api.staging.arcusapi.com',
+      baseURL: baseUrl,
       headers: {
         Accept: 'application/vnd.regalii.v3.mx+json',
         'Content-Type': 'application/json',
         'Content-MD5': '',
       },
+      timeout,
     };
   }
 
@@ -115,6 +145,7 @@ export class Arcus {
     return this.http(this.config.baseURL + path, {
       method: 'GET',
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -127,6 +158,7 @@ export class Arcus {
     return this.http(this.config.baseURL + path, {
       method: 'GET',
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -140,6 +172,7 @@ export class Arcus {
     return this.http(this.config.baseURL + path, {
       method: 'GET',
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -153,6 +186,7 @@ export class Arcus {
     return this.http(this.config.baseURL + path, {
       method: 'GET',
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -171,6 +205,7 @@ export class Arcus {
     return this.http(this.config.baseURL + path, {
       method: 'GET',
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -189,6 +224,7 @@ export class Arcus {
     return this.http(this.config.baseURL + path + query, {
       method: 'GET',
       headers: this.generateDefaultHeaders(path + query),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -202,6 +238,7 @@ export class Arcus {
     return this.http(this.config.baseURL + path, {
       method: 'GET',
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -216,6 +253,7 @@ export class Arcus {
       body: generateBody(params),
       method: 'POST',
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -229,6 +267,7 @@ export class Arcus {
       body: generateBody(body),
       method: 'POST',
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -241,6 +280,7 @@ export class Arcus {
     return this.http(this.config.baseURL + path, {
       method: 'POST',
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -253,6 +293,7 @@ export class Arcus {
     return this.http(this.config.baseURL + path, {
       method: 'GET',
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -265,6 +306,7 @@ export class Arcus {
     return this.http(this.config.baseURL + path, {
       method: 'DELETE',
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -277,6 +319,7 @@ export class Arcus {
     return this.http(this.config.baseURL + path, {
       method: 'GET',
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -299,6 +342,7 @@ export class Arcus {
       method: 'POST',
       body: generateBody(params),
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -315,6 +359,7 @@ export class Arcus {
       method: 'POST',
       body: generateBody(params),
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -330,6 +375,7 @@ export class Arcus {
     return this.http(this.config.baseURL + path, {
       method: 'GET',
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
@@ -346,6 +392,7 @@ export class Arcus {
       method: 'POST',
       body: generateBody({ id: transactionId }),
       headers: this.generateDefaultHeaders(path),
+      timeout: this.config.timeout,
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)

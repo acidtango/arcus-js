@@ -11,10 +11,10 @@ const billerNetflix = billerWithName('CÓDIGO NETFLIX $150');
 const EXAMPLE_FAKE_EXTERNAL_TRANSACTION_ID = 'EXAMPLE_NON_EXISTINT_TRANSACTION';
 
 describe('Arcus', () => {
-  const arcus = Arcus.create(
-    process.env.ARCUS_API_KEY as string,
-    process.env.ARCUS_SECRET_KEY as string,
-  );
+  const arcus = Arcus.createNew({
+    apiKey: process.env.ARCUS_API_KEY as string,
+    secretKey: process.env.ARCUS_SECRET_KEY as string,
+  });
 
   it('getAccount', async () => {
     const account = await arcus.getAccount();
