@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "node-fetch": "2.6.1",
-    "regenerator-runtime": "0.13.7"
+    "regenerator-runtime": "0.13.9"
   },
   "devDependencies": {
     "@commitlint/cli": "12.1.4",
