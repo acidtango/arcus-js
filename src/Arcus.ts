@@ -12,6 +12,7 @@ import { ArcusError } from './typings/ArcusError';
 import { ArcusErrorCode } from './typings/ArcusErrorCode';
 import { ArcusErrorResponse } from './typings/ArcusErrorResponse';
 import { ArcusGetTransactionParams } from './typings/ArcusGetTransactionParams';
+import { ArcusOptions } from './typings/ArcusOptions';
 import { ArcusSingleConsultParams } from './typings/ArcusSingleConsultParams';
 import { ArcusSinglePayParams } from './typings/ArcusSinglePayParams';
 import { ArcusTransaction } from './typings/ArcusTransaction';
@@ -27,7 +28,6 @@ import { camelize } from './utils/camelize';
 import { ArcusCrypto } from './utils/crypto/ArcusCrypto';
 import { ArcusCryptoNode } from './utils/crypto/ArcusCryptoNode';
 import { generateBody } from './utils/generateBody';
-import { ArcusOptions } from './typings/ArcusOptions';
 
 /**
  * Arcus Fintech JS client
@@ -363,7 +363,7 @@ export class Arcus {
     })
       .then(Arcus.dealWithErrors)
       .then(Arcus.extractJson)
-      .then((data) => camelize<ArcusTransaction>(data));
+      .then((data) => camelize<PostSingleConsultResponse>(data));
   }
 
   /**
