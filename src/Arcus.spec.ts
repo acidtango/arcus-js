@@ -1,4 +1,11 @@
-import { NETFLIX, TELCEL, TOTALPLAY, TRANSACTION } from '../test/fixtures/fixtures';
+import {
+  CFE,
+  CFE_TRANSACTION,
+  NETFLIX,
+  TELCEL,
+  TOTALPLAY,
+  TRANSACTION,
+} from '../test/fixtures/fixtures';
 import { Arcus } from './Arcus';
 import { ArcusBiller } from './typings/ArcusBiller';
 import { ArcusErrorCode } from './typings/ArcusErrorCode';
@@ -120,7 +127,16 @@ describe('Arcus', () => {
 
   it.todo('postBill');
 
-  it.todo('getBillSingleConsult');
+  it('getBillSingleConsult', async () => {
+    const consult = await arcus.singleConsult({
+      accountNumber: CFE_TRANSACTION.accountNumber,
+      billerId: CFE.billerId,
+    });
+
+    expect(consult).toBeDefined();
+    expect(consult.accountNumber).toEqual(CFE_TRANSACTION.accountNumber);
+    expect(consult.fxRate).toEqual(1);
+  });
 
   it.todo('getBillSinglePay');
 
