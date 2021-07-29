@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/acidtango/arcus-js/compare/v0.0.7...v0.1.3) (2021-07-29)
+
+
+### Features
+
+* add more parameters in named constructor ([#39](https://github.com/acidtango/arcus-js/issues/39)) ([193b302](https://github.com/acidtango/arcus-js/commit/193b302830548af965aef1577de98fa3a1237c21))
+
+
+### Bug Fixes
+
+* change to correct dto in response of the single consult endpoint ([#49](https://github.com/acidtango/arcus-js/issues/49)) ([3d17ed1](https://github.com/acidtango/arcus-js/commit/3d17ed1b77110a18084f441e4391cd5efa631ed5))
+* **deps:** update dependency regenerator-runtime to v0.13.9 ([50001ab](https://github.com/acidtango/arcus-js/commit/50001ab8f3c1674373e36e390230cd2615f73936))
+* unexpected errors ([#34](https://github.com/acidtango/arcus-js/issues/34)) ([8e08ec0](https://github.com/acidtango/arcus-js/commit/8e08ec0eb2c8acccde0636ee8559cf4bced4b25a))
+
 ### [0.1.2](https://github.com/acidtango/arcus-js/compare/v0.1.0...v0.1.2) (2021-07-19)
 
 
